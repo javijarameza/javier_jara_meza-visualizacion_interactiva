@@ -1,0 +1,44 @@
+[
+  {
+    "producto": "Smartphone A",
+    "mes": "Enero",
+    "ventas": 132,
+    "ingresos": 25740,
+    "precio": 195
+  },
+  {
+    "producto": "Smartphone B",
+    "mes": "Enero",
+    "ventas": 78,
+    "ingresos": 16380,
+    "precio": 210
+  },
+  {
+    "producto": "Tablet X",
+    "mes": "Enero",
+    "ventas": 64,
+    "ingresos": 19840,
+    "precio": 310
+  },
+  {
+    "producto": "Smartphone A",
+    "mes": "Febrero",
+    "ventas": 171,
+    "ingresos": 33345,
+    "precio": 195
+  },
+  {
+    "producto": "Smartphone B",
+    "mes": "Febrero",
+    "ventas": 96,
+    "ingresos": 20160,
+    "precio": 210
+  },
+  {
+    "producto": "Tablet X",
+    "mes": "Febrero",
+    "ventas": 75,
+    "ingresos": 23250,
+    "precio": 310
+  }
+]

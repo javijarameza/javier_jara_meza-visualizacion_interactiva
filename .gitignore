@@ -1,0 +1,22 @@
+# Dependencias (no se usan, pero se ignoran por si acaso)
+node_modules/
+package-lock.json
+
+# Sistema operativo
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Editores
+.vscode/
+.idea/
+*.swp
+
+# Registros y temporales
+*.log
+npm-debug.log*
+*.tmp
+
+# Material de la asignatura (no forma parte del proyecto)
+mexvidama08_actind.docx
+Material complementario.txt

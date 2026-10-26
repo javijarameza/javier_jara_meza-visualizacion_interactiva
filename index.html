@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel de ventas por producto · Visualización interactiva</title>
+  <meta name="description" content="Dashboard interactivo de ventas, ingresos y precios por producto y mes, construido con Google Charts y D3.js a partir de un archivo JSON externo.">
+  <meta name="author" content="Javier Jara Meza">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='38' cy='40' r='22' fill='%232563eb'/><circle cx='66' cy='62' r='16' fill='%230d9488' opacity='.85'/></svg>">
+  <link rel="stylesheet" href="./css/styles.css">
+</head>
+<body>
+  <a class="salto-contenido" href="#contenido">Ir al contenido principal</a>
+
+  <header class="cabecera">
+    <div class="contenedor cabecera__interior">
+      <div class="cabecera__texto">
+        <p class="cabecera__etiqueta">Actividad individual · Visualizaciones interactivas</p>
+        <h1>Panel de ventas por producto</h1>
+        <p class="cabecera__subtitulo">
+          Evolución de ventas, ingresos y precios de <strong>Smartphone A</strong>,
+          <strong>Smartphone B</strong> y <strong>Tablet X</strong> durante enero y febrero.
+        </p>
+      </div>
+
+      <div class="cabecera__acciones">
+        <button type="button" id="btn-actualizar" class="boton">
+          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M20 11a8 8 0 1 0-2.3 5.7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            <path d="M20 4v7h-7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>Actualizar</span>
+        </button>
+
+        <label class="interruptor" for="chk-auto">
+          <input type="checkbox" id="chk-auto">
+          <span>Auto cada 10 s</span>
+        </label>
+
+        <p class="cabecera__sello">
+          <span id="sello-dataset" class="chip">Dataset v1 · original</span>
+          <span id="sello-tiempo">Cargando datos…</span>
+        </p>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido" class="contenedor">
+    <div id="banner-error" class="banner" role="alert" hidden></div>
+
+    <section class="kpis" aria-label="Indicadores clave">
+      <article class="kpi">
+        <p class="kpi__titulo">Ventas totales</p>
+        <p class="kpi__valor" id="kpi-ventas">—</p>
+        <p class="kpi__nota" id="kpi-ventas-nota">unidades en el periodo</p>
+      </article>
+      <article class="kpi">
+        <p class="kpi__titulo">Ingresos totales</p>
+        <p class="kpi__valor" id="kpi-ingresos">—</p>
+        <p class="kpi__nota" id="kpi-ingresos-nota">suma de ambos meses</p>
+      </article>
+      <article class="kpi">
+        <p class="kpi__titulo">Variación de ventas</p>
+        <p class="kpi__valor" id="kpi-variacion">—</p>
+        <p class="kpi__nota" id="kpi-variacion-nota">último mes frente al primero</p>
+      </article>
+      <article class="kpi">
+        <p class="kpi__titulo">Producto líder</p>
+        <p class="kpi__valor kpi__valor--texto" id="kpi-lider">—</p>
+        <p class="kpi__nota" id="kpi-lider-nota">por ingresos acumulados</p>
+      </article>
+    </section>
+
+    <section class="rejilla-graficos">
+      <article class="panel" aria-labelledby="titulo-google">
+        <header class="panel__cabecera">
+          <div>
+            <h2 id="titulo-google">Ventas mensuales por producto</h2>
+            <p class="panel__descripcion">
+              Columnas agrupadas por mes: cada color representa un producto, para comparar
+              su evolución entre enero y febrero.
+            </p>
+          </div>
+          <span class="chip chip--azul">Google Charts</span>
+        </header>
+
+        <div id="google-legend" class="leyenda leyenda--estatica" aria-hidden="true"></div>
+        <div id="google-chart" class="lienzo" role="img" aria-label="Gráfico de columnas con las ventas mensuales de cada producto"></div>
+
+        <p class="panel__pie" id="google-estado">Esperando datos…</p>
+      </article>
+
+      <article class="panel" aria-labelledby="titulo-d3">
+        <header class="panel__cabecera">
+          <div>
+            <h2 id="titulo-d3">Ingresos, ventas y precio en una sola vista</h2>
+            <p class="panel__descripcion">
+              Burbujas: el <strong>mes</strong> se sitúa en el eje X, los <strong>ingresos</strong> en el eje Y,
+              el <strong>tamaño</strong> refleja las ventas y el <strong>color</strong> identifica el producto.
+            </p>
+          </div>
+          <span class="chip chip--teal">D3.js</span>
+        </header>
+
+        <div id="d3-legend" class="leyenda" role="group" aria-label="Filtrar por producto"></div>
+        <div id="d3-chart" class="lienzo lienzo--d3"></div>
+        <div id="d3-detalle" class="detalle" aria-live="polite">
+          <p class="detalle__pista">Pasa el cursor por una burbuja para ver el detalle y haz clic para fijar un producto.</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="notas" aria-label="Notas sobre los datos">
+      <h2>Cómo se actualizan los datos</h2>
+      <p>
+        El botón <strong>Actualizar</strong> vuelve a leer el archivo JSON desde el servidor
+        (alternando entre la versión original y una versión modificada) y redibuja ambos gráficos
+        con transiciones, sin recargar la página. La marca de tiempo y la etiqueta del dataset
+        confirman qué versión se está mostrando en cada momento.
+      </p>
+      <p class="notas__fuente">
+        Fuente: <code>data/ventas.json</code> y <code>data/ventas-actualizado.json</code> ·
+        Los importes se expresan en unidades monetarias sin símbolo.
+      </p>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor pie__interior">
+      <p>Javier Jara Meza · Actividad individual · Visualizaciones interactivas · 26/10/2026</p>
+      <p class="pie__meta">Google Charts + D3.js v7 · datos JSON externos</p>
+    </div>
+  </footer>
+
+  <noscript>
+    <p class="banner banner--visible">Este panel necesita JavaScript activado para dibujar los gráficos.</p>
+  </noscript>
+
+  <script src="./vendor/d3.v7.min.js"></script>
+  <script src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="module" src="./js/app.js"></script>
+</body>
+</html>

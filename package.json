@@ -1,0 +1,22 @@
+{
+  "name": "dashboard-visualizacion-interactiva",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Dashboard interactivo con Google Charts y D3.js sobre datos JSON de ventas (actividad individual de Visualizaciones interactivas).",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [
+    "d3",
+    "google-charts",
+    "json",
+    "dashboard",
+    "visualizacion-de-datos"
+  ],
+  "author": "Javier Jara Meza",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  }
+}
