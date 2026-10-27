@@ -20,3 +20,8 @@ npm-debug.log*
 # Material de la asignatura (no forma parte del proyecto)
 mexvidama08_actind.docx
 Material complementario.txt
+
+# Entregables locales (no se publican en el repositorio)
+*.zip
+Jara_Meza_Javier_Visualizaciones_Interactivas.pdf
+Jara_Meza_Javier_Visualizaciones_Interactivas.docx

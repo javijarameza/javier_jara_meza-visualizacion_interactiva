@@ -1,0 +1,7 @@
+# Guardar los archivos de texto con LF y tratar las imágenes como binarias
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.pdf binary
+*.zip binary

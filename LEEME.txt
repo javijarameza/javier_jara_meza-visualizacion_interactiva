@@ -1,0 +1,24 @@
+PANEL DE VENTAS POR PRODUCTO
+Javier Jara Meza · Visualizaciones interactivas · 26/10/2026
+
+VER ONLINE
+https://javijarameza.github.io/javier_jara_meza-visualizacion_interactiva/
+
+VER EN LOCAL
+1. Abrir una consola en esta carpeta.
+2. Ejecutar:   node server.js
+3. Abrir en el navegador:   http://localhost:3000
+
+No hace falta instalar nada (el proyecto no tiene dependencias), pero sí tener Node.js.
+El servidor es necesario porque el navegador no puede leer el JSON con file://.
+
+CONTENIDO
+- index.html, css/, js/, data/, vendor/                 el dashboard
+- server.js                                             servidor local (sin dependencias)
+- INFORME.md                                            memoria de la actividad (fuente editable)
+- informe/img/                                          capturas usadas en la memoria
+- Jara_Meza_Javier_Visualizaciones_Interactivas.pdf     informe en PDF
+- README.md                                             descripción del proyecto
+
+CÓDIGO
+https://github.com/javijarameza/javier_jara_meza-visualizacion_interactiva
